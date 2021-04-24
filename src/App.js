@@ -1,9 +1,10 @@
 import React from 'react';
+import Login from './views/Login';
 
 function App() {
   return (
     <div>
-      App
+      <Login></Login>
     </div>
   )
 }
