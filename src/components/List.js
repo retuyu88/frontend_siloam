@@ -5,11 +5,11 @@ import './List.css'
 const ListContainer = ({ title, cards }) => {
     return (
         <div style={styles.container}>
-            <h4>{title}</h4>
+            <h2>{title}</h2>
             
                 <ListCard />
-            { cards.map(card => {
-              return  <ListCard text={card.name}></ListCard>
+            { cards.map((card,i) => {
+              return  <ListCard key={i} text={card.name}></ListCard>
             })}
         
         </div>
@@ -20,7 +20,9 @@ const styles = {
     container:{
         backgroundColor: "#ccc",
         borderRadius: 3,
-        width: 300
+        width: 300,
+        padding: 8,
+        marginRight: 8,
     }
 }
 

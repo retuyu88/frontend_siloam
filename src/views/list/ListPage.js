@@ -8,12 +8,20 @@ class ListPage extends React.Component {
     const { lists } = this.props
     return (
       <div>
-        { lists.map(list => {
-            return <ListContainer title={list.title} cards={list.cards}></ListContainer>
-        })}
+          <div style={styles.listContainers}>{ lists.map((list,i) => {
+            return <ListContainer key={i} title={list.title} cards={list.cards}></ListContainer>
+        })}</div>
+        
       </div>
     );
   }
+}
+
+const styles = {
+    listContainers : {
+        display: "flex",
+        flexDirection: "row"
+    }
 }
 
 const mapStateToProps = state => ({

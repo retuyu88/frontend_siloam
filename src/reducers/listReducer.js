@@ -8,15 +8,15 @@ const initialState = [
                 name : " redesign page"
             },
             {
+                id : 1,
+                name : " redesign page"
+            },
+            {
                 id : 2,
                 name : " redesign page"
             },
             {
                 id : 3,
-                name : " redesign page"
-            },
-            {
-                id : 4,
                 name : " redesign page"
             }
         ]
