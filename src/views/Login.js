@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
+import "./Login.css";
 
 const Login = () => {
   //set variable name and hook to update the variable
-  const [name, setName] = useState(initialState);
-  const [email, setEmail] = useState(initialState);
-  const [password, setPassword] = useState(initialState);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <div className="login">
@@ -28,6 +29,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <button type="submit" className="submit__btn">Login</button>
       </form>
     </div>
   );
