@@ -1,4 +1,4 @@
-import { CONSTANTS } from "../_actions";
+import { CONSTANTS } from "../_constants";
 
 let user = JSON.parse(localStorage.getItem('user'))
 const initialState =

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./Login.css";
 
-const Login = () => {
+const Register = () => {
   //set variable name and hook to update the variable
 //   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -10,14 +10,13 @@ const Login = () => {
   return (
     <div className="login">
       <form className="login__form">
-        <h1>Login Form</h1>
-        {/* name is for register only*/}
-        {/* <input
+        <h1>Register Form</h1>
+        <input
           type="name"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        /> */}
+        />
         <input
           type="email"
           placeholder="Email"
@@ -30,10 +29,10 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" className="submit__btn">Login</button>
+        <button type="submit" className="submit__btn">Register</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;

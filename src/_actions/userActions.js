@@ -1,10 +1,25 @@
-import { userConstants } from "../_constants";
-import api from "../services";
+import { CONSTANTS } from "../_constants";
+import { userService} from "../services";
 
-export const userLoggedIn = user => ({type : USER_LOGGED_IN, user})
+export const userActions = {
+  login,
+}
 
-export const login = (credentials) => (dispatch) =>
-  api.user.login(credentials).then((user) => {
-    localStorage.tokens = user.auth_token;
-    dispatch(userLoggedIn(user));
-  });
+function login(username, password) {
+  return dispatch => {
+    dispatch(request({username}));
+
+    userService.login(username,password).then(user => {
+      dispatch(success(user))
+    },
+    error => {
+      dispatch(failure(error.toString()));
+     
+  }
+  )
+    
+  }
+  function request(user) { return { type: CONSTANTS.LOGIN_REQUEST, user } }
+  function success(user) { return { type: CONSTANTS.LOGIN_SUCCESS, user } }
+  function failure(error) { return { type: CONSTANTS.LOGIN_FAILURE, error } }
+}

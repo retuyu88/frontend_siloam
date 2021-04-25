@@ -1,4 +1,4 @@
-export const userConstants = {
+export const CONSTANTS = {
     //REGISTER
     REGISTER_REQUEST: 'USERS_REGISTER_REQUEST',
     REGISTER_SUCCESS: 'USERS_REGISTER_SUCCESS',
