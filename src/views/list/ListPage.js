@@ -9,7 +9,8 @@ class ListPage extends React.Component {
     return (
       <div style={styles.listPage}>
         <div style={styles.leftpanel}>Logo</div>
-        <div> 
+        <div style={styles.rightpanel}> 
+          <div>Product Roadmap</div>
           <div style={styles.listContainers}>
             {lists.map((list, i) => {
               return (
@@ -41,6 +42,10 @@ const styles = {
     background: "black",
     width : '5%'
   },
+  rightpanel: {
+    marginRight: '50px',
+    marginLeft : '50px'
+  }
 };
 
 const mapStateToProps = (state) => ({

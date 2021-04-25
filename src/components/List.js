@@ -1,5 +1,6 @@
 import React from 'react';
 import ListCard from './ListCard';
+import ActionButton from "./ActionButton";
 import './List.css'
 
 const ListContainer = ({ title, cards }) => {
@@ -12,6 +13,7 @@ const ListContainer = ({ title, cards }) => {
             { cards.map((card,i) => {
               return  <ListCard key={i} text={card.name}></ListCard>
             })}
+            <ActionButton></ActionButton>
         
         </div>
     )
@@ -26,7 +28,7 @@ const styles = {
         borderRadius: 8,
         minWidth: 300,
         padding: 8,
-        marginRight: 8,
+        marginRight: 16,
     },
     title :{
 
@@ -47,7 +49,7 @@ const styles = {
     },
     date : {
         color: '#2F3136',
-        fontWeight: 'bold',
+        fontWeight: 'bolder',
         fontStyle: 'normal',    
         lineHeight: '20px',
         fontSize: '12px'
