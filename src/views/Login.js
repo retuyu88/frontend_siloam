@@ -3,7 +3,7 @@ import "./Login.css";
 
 const Login = () => {
   //set variable name and hook to update the variable
-  const [name, setName] = useState('');
+//   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -11,12 +11,13 @@ const Login = () => {
     <div className="login">
       <form className="login__form">
         <h1>Login Form</h1>
-        <input
+        {/* name is for register only*/}
+        {/* <input
           type="name"
           placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-        />
+        /> */}
         <input
           type="email"
           placeholder="Email"
