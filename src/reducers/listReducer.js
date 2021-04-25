@@ -33,6 +33,28 @@ const initialState = [
         ]
 
     },
+    {
+        title: "Stagging",
+        id: 0,
+        cards: [
+            {
+                id : 0,
+                name : " redesign page"
+            }
+        ]
+
+    },
+    {
+        title: "Production",
+        id: 0,
+        cards: [
+            {
+                id : 0,
+                name : " redesign page"
+            }
+        ]
+
+    },
 
 ]
 

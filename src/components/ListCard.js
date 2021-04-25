@@ -7,7 +7,7 @@ const ListCard = ({text}) => {
     return (
         <Card style={styles.cardContainer}>
             <CardContent>
-            <Typography gutterBottom>{text}</Typography>
+            <Typography style={styles.task} gutterBottom>{text}</Typography>
             </CardContent>
         </Card>
     )
@@ -16,6 +16,11 @@ const ListCard = ({text}) => {
 const styles = {
     cardContainer : {
         marginBottom: 8
+    },
+    task :{
+        fontSize : '14px',
+        lineHeight: '20px',
+        color : '#2F3136'
     }
 }
 
