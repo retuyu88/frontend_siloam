@@ -7,7 +7,7 @@ class ActionButton extends React.Component{
 
         // const buttonText = list ? "New Group" : "New Task"
         return (
-            <div>
+            <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                 <OutlineIcon></OutlineIcon>
                 <p>New Task</p>
             </div>

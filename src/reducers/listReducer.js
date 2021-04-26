@@ -24,7 +24,7 @@ const initialState = [
     },
     {
         title: "Process",
-        id: 0,
+        id: 1,
         cards: [
             {
                 id : 0,
@@ -35,7 +35,7 @@ const initialState = [
     },
     {
         title: "Stagging",
-        id: 0,
+        id: 2,
         cards: [
             {
                 id : 0,
@@ -46,7 +46,7 @@ const initialState = [
     },
     {
         title: "Production",
-        id: 0,
+        id: 3,
         cards: [
             {
                 id : 0,
