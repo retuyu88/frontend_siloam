@@ -41,9 +41,15 @@ const ListCard = ({ text }) => {
   const handleOpen = () => {
     setOpen(true);
   };
+  const handleOpenDelete = () => {
+    setOpenDelete(true);
+  };
 
   const handleModalClose = () => {
     setOpen(false);
+  };
+  const handleModalDeleteClose = () => {
+    setOpenDelete(false);
   };
 
   const body = (
@@ -54,15 +60,30 @@ const ListCard = ({ text }) => {
       <p style={styles.modalSubTitle}>Progress</p>
       <input style={styles.modalInput2}></input>
       <div style={styles.buttonContainer}>
-          <button style={styles.buttonCancel}>Cancel</button>
+          <button onClick={handleModalClose} style={styles.buttonCancel}>Cancel</button>
           <button style={styles.buttonSave}>Save Task</button>
+      </div>
+    </div>
+  );
+  const bodyDelete = (
+    <div style={modalStyle} className={classes.paperdelete}>
+      <span style={styles.modalTitleDelete}>Delete Task</span>
+      <span style={styles.modalSubTitleDelete}>
+          Are you sure want to delete this task ? <br/>
+          your action can't be reverted
+      </span>
+      
+      <div style={styles.buttonContainer}>
+          <button onClick={handleModalDeleteClose} style={styles.buttonCancel}>Cancel</button>
+          <button style={styles.buttonDelete}>Delete</button>
       </div>
     </div>
   );
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const [openModal, setOpen] = React.useState(false);
+  const [openModal,setOpen] = React.useState(false);
+  const [openModalDelete,setOpenDelete] = React.useState(false);
   return (
     <Card style={styles.cardContainer}>
       <CardContent>
@@ -95,7 +116,7 @@ const ListCard = ({ text }) => {
                 <Button className={classes.buttonNav} onClick={handleOpen}>
                   <EditIcon></EditIcon>Edit
                 </Button>
-                <Button className={classes.buttonNav}><Delete></Delete>Delete</Button>
+                <Button className={classes.buttonNav} onClick={handleOpenDelete}><Delete></Delete>Delete</Button>
                 
                 <Modal
                   open={openModal}
@@ -104,6 +125,14 @@ const ListCard = ({ text }) => {
                   aria-describedby="simple-modal-description"
                 >
                   {body}
+                </Modal>
+                <Modal
+                  open={openModalDelete}
+                  onClose={handleModalDeleteClose}
+                  aria-labelledby="simple-modal-title"
+                  aria-describedby="simple-modal-description"
+                >
+                  {bodyDelete}
                 </Modal>
               </Typography>
             </Popover>
@@ -145,11 +174,22 @@ const styles = {
     fontSize : '16px',
     marginBottom : '20px',
   },
+  modalTitleDelete : {
+    fontSize : '16px',
+    marginBottom : '20px',
+    fontWeight : 'bold'
+  },
   modalSubTitle : {
     fontSize: '12px',
     lineHeight : '16px',
     margin : '4px 0px',
     color : '#5D6372'
+  },
+  modalSubTitleDelete : {
+    fontSize: '14px',
+    lineHeight : '16px',
+    margin : '4px 0px',
+    color : '#262626'
   },
   modalInput1 : {
       minWidth : '500px',
@@ -180,13 +220,24 @@ const styles = {
     backgroundColor : '#27AE60',
     border : '1px solid #27AE60',
     color : '#FFFFFF',
-    marginLeft : '8px'
+    marginLeft : '8px',
+    borderRadius : '2px'
+  },
+  buttonDelete: {
+    width : '77px',
+    height: '32px',
+    backgroundColor : '#EB5757',
+    border : '1px solid #EB5757',
+    color : '#FFFFFF',
+    marginLeft : '8px',
+    borderRadius : '2px'
   },
   buttonCancel : {
     width : '77px',
     height: '32px',
     backgroundColor : '#FFFFFF',
-    border : '1px solid #D9D9D9'
+    border : '1px solid #D9D9D9',
+    borderRadius : '2px'
   }
 };
 
@@ -196,6 +247,7 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     flexDirection: 'column',
     paddingLeft: 0,
+    width: '138px',
     paddingRight:0
   },
   buttonNav: {
@@ -204,7 +256,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItem: 'center',
     justifyContent: 'flex-start',
-    textTransform : 'none'
+    textTransform : 'none',
+    '&:hover': {
+        background: '#F5F0FC',
+        color : '#5E20B3'
+     },
   },
   paper: {
     position: "absolute",
@@ -213,6 +269,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  paperdelete: {
+    position: "absolute",
+    minWidth: 400,
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundColor: theme.palette.background.paper,
+    border: "1px solid #FFFFFF",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
