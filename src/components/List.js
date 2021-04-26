@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ListCard from './ListCard';
 import ActionButton from "./ActionButton";
 import './List.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import { connect,useDispatch } from "react-redux";
+import { listActions } from "../_actions";
+import { addList } from '../_actions/listActions';
 
 const ListContainer = ({ title, cards ,id}) => {
+    const [text] = useState(0);
     function getModalStyle() {
         const top = 50;
         const left = 50;
@@ -31,6 +35,14 @@ const ListContainer = ({ title, cards ,id}) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const HandleAddList = () => {
+    const dispatch = useDispatch()
+    if (text){
+      dispatch(addList(text))
+    }
+    return
+  };
+ 
   const body = (
     <div style={modalStyle} className={classes.paper}>
     <span style={styles.modalTitle}>Create Task</span>
@@ -40,7 +52,7 @@ const ListContainer = ({ title, cards ,id}) => {
     <input style={styles.modalInput2}></input>
     <div style={styles.buttonContainer}>
           <button style={styles.buttonCancel}>Cancel</button>
-          <button style={styles.buttonSave}>Save Task</button>
+          <button onMouseDown = {HandleAddList} style={styles.buttonSave}>Save Task</button>
       </div>
   </div>
   );
@@ -80,6 +92,7 @@ const styles = {
         minWidth: 300,
         padding: 8,
         marginRight: 16,
+        height : 'fit-content'
     },
     title :{
 
@@ -188,4 +201,8 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default ListContainer;
+  const mapStateToProps = (state) => ({
+    lists: state.lists,
+  });
+
+export default connect ()(ListContainer);

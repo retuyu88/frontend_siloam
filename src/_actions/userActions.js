@@ -3,6 +3,8 @@ import { userService} from "../services";
 
 export const userActions = {
   login,
+  getList,
+  addList
 }
 
 function login(username, password) {
@@ -22,4 +24,19 @@ function login(username, password) {
   function request(user) { return { type: CONSTANTS.LOGIN_REQUEST, user } }
   function success(user) { return { type: CONSTANTS.LOGIN_SUCCESS, user } }
   function failure(error) { return { type: CONSTANTS.LOGIN_FAILURE, error } }
+}
+function getList(){
+  return dispatch => {
+    userService.getList().then(list => {
+      return list
+    })
+  }
+}
+
+function addList(){
+  return dispatch => {
+    userService.getList().then(list => {
+      return list
+    })
+  }
 }
