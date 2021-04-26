@@ -5,9 +5,9 @@ import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { connect} from "react-redux";
+import { connect, useDispatch} from "react-redux";
 // import { listActions } from "../_actions";
-// import { addList } from "../_actions/listActions";
+import { addList } from "../_actions/listActions";
 
 const ListContainer = ({ title, cards, id }) => {
 //   const [text] = useState(0);
@@ -42,6 +42,7 @@ const ListContainer = ({ title, cards, id }) => {
 //     }
 //     return;
 //   };
+const dispatch = useDispatch();
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -52,7 +53,7 @@ const ListContainer = ({ title, cards, id }) => {
       <input style={styles.modalInput2}></input>
       <div style={styles.buttonContainer}>
         <button style={styles.buttonCancel}>Cancel</button>
-        <button style={styles.buttonSave}>
+        <button onClick={() => dispatch(addList)} style={styles.buttonSave}>
           Save Task
         </button>
       </div>
@@ -72,10 +73,22 @@ const ListContainer = ({ title, cards, id }) => {
     >
       <div style={styles.title}>
         <div style={styles.taskContainer}>
-          <span style={styles.task}>Group Task {id}</span>
+          <span style={ id === 0
+          ? styles.task1
+          : id === 1
+          ? styles.task2
+          : id === 2
+          ? styles.task3
+          : styles.task4}>Group Task {id}</span>
         </div>
         <div style={styles.dateContainer}>
-          <span style={styles.date}>January- March</span>
+          <span style={styles.date}>{id === 0
+          ? 'January - March'
+          : id === 1
+          ? 'April - June '
+          : id === 2
+          ? 'July - September'
+          : 'October - Desember'}</span>
         </div>
       </div>
       {cards.map((card, i) => {
@@ -144,6 +157,7 @@ const styles = {
   },
   title: {},
   invisButton: {
+    marginTop : '10px',
     background: "transparent",
     border: "none",
   },
@@ -153,11 +167,35 @@ const styles = {
   dateContainer: {
     marginBottom: 8,
   },
-  task: {
+  task1: {
     backgroundColor: "#FFF0F6",
     border: "1px solid #FFADD2",
     padding: "1px 8px 1px 8px",
     color: "#EB2F96",
+    fontSize: "12px",
+    lineHeight: "20px",
+  },
+  task2: {
+    backgroundColor: "#F9F0FF",
+    border: "1px solid #D3ADF7",
+    padding: "1px 8px 1px 8px",
+    color: "#7B61FF",
+    fontSize: "12px",
+    lineHeight: "20px",
+  },
+  task3: {
+    backgroundColor: "#F0F5FF",
+    border: "1px solid #ADC6FF",
+    padding: "1px 8px 1px 8px",
+    color: "#2F54EB",
+    fontSize: "12px",
+    lineHeight: "20px",
+  },
+  task4: {
+    backgroundColor: "#F6FFED",
+    border: "1px solid #B7EB8F",
+    padding: "1px 8px 1px 8px",
+    color: "#52C41A",
     fontSize: "12px",
     lineHeight: "20px",
   },

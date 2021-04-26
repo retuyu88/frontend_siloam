@@ -1,14 +1,19 @@
 import React from "react";
 import ListContainer from "../../components/List";
-
+import logo from "../../assets/logo.png";
 import { connect } from "react-redux";
+import { DragDropContext } from "react-beautiful-dnd";
 
 class ListPage extends React.Component {
+  onDragEnd = () => {
+    //reordering logic
+  }
   render() {
     const { lists } = this.props;
     return (
+      <DragDropContext onDragEnd={this.onDragEnd}>
       <div style={styles.listPage}>
-        <div style={styles.leftpanel}>Logo</div>
+        <div style={styles.leftpanel}><img style={styles.leftpanelimage} src={logo} alt="Logo" />;</div>
         <div style={styles.rightpanel}>
           <div style={styles.mainTitle}>Product Roadmap</div>
           <div style={styles.listContainers}>
@@ -42,6 +47,7 @@ class ListPage extends React.Component {
           </div>
         </div>
       </div>
+      </DragDropContext>
     );
   }
 }
@@ -89,6 +95,10 @@ mainTitle : {
   leftpanel: {
     background: "black",
     width: "5%",
+    padding: '1%'
+  },
+  leftpanelimage: {
+    marginTop: '20px'
   },
   rightpanel: {
     marginRight: "50px",

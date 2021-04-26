@@ -34,6 +34,7 @@ function getList(){
 }
 
 function addList(){
+  console.log("HEREE")
   return dispatch => {
     userService.getList().then(list => {
       return list
