@@ -16,16 +16,8 @@ const ListContainer = ({ title, cards ,id}) => {
           transform: `translate(-${top}%, -${left}%)`,
         };
       };
-      const useStyles = makeStyles((theme) => ({
-        paper: {
-          position: 'absolute',
-          width: 400,
-          backgroundColor: theme.palette.background.paper,
-          border: '2px solid #000',
-          boxShadow: theme.shadows[5],
-          padding: theme.spacing(2, 4, 3),
-        },
-      }));
+      
+ 
 
       const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -41,12 +33,16 @@ const ListContainer = ({ title, cards ,id}) => {
   };
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
-      {/* <SimpleModal /> */}
-    </div>
+    <span style={styles.modalTitle}>Create Task</span>
+    <span style={styles.modalSubTitle}>Task Name</span>
+    <input style={styles.modalInput1}></input>
+    <p style={styles.modalSubTitle}>Progress</p>
+    <input style={styles.modalInput2}></input>
+    <div style={styles.buttonContainer}>
+          <button style={styles.buttonCancel}>Cancel</button>
+          <button style={styles.buttonSave}>Save Task</button>
+      </div>
+  </div>
   );
     return (
         <div style={styles.container}>
@@ -112,7 +108,84 @@ const styles = {
         fontStyle: 'normal',    
         lineHeight: '20px',
         fontSize: '12px'
-    }
+    },
+    modalTitle : {
+        fontSize : '16px',
+        marginBottom : '20px',
+      },
+      modalSubTitle : {
+        fontSize: '12px',
+        lineHeight : '16px',
+        margin : '4px 0px',
+        color : '#5D6372'
+      },
+      modalInput1 : {
+          minWidth : '500px',
+          height : '39px',
+          fontSize : '14px',
+          padding : '10px',
+          border: '1px solid #E5E5E5',
+          borderRadius : '4px',
+          margin : '4px 0px'
+      },
+      modalInput2 : {
+        width : '99px',
+          height : '39px',
+          fontSize : '14px',
+          padding : '10px',
+          border: '1px solid #E5E5E5',
+          borderRadius : '4px',
+          margin : '4px 0px'
+      },
+      buttonContainer :{
+        marginTop : '50px',
+        display: 'flex',
+        justifyContent : 'flex-end'
+      },
+      buttonSave: {
+        width : '77px',
+        height: '32px',
+        backgroundColor : '#27AE60',
+        border : '1px solid #27AE60',
+        color : '#FFFFFF',
+        marginLeft : '8px'
+      },
+      buttonCancel : {
+        width : '77px',
+        height: '32px',
+        backgroundColor : '#FFFFFF',
+        border : '1px solid #D9D9D9'
+      }
 }
+const useStyles = makeStyles((theme) => ({
+    typography: {
+      padding: theme.spacing(2),
+      display:'flex',
+      flexDirection: 'column',
+      paddingLeft: 0,
+      paddingRight:0
+    },
+    buttonNav: {
+      background: 'white',
+      border: 'none',
+      display: 'flex',
+      alignItem: 'center',
+      justifyContent: 'flex-start',
+      textTransform : 'none'
+    },
+    paper: {
+      position: "absolute",
+      minWidth: 560,
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: theme.palette.background.paper,
+      border: "2px solid #000",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+    button: {
+      margin: theme.spacing(1),
+    },
+  }));
 
 export default ListContainer;

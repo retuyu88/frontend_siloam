@@ -7,7 +7,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import EditIcon from '@material-ui/icons/Edit';
 import Modal from "@material-ui/core/Modal";
-import DeleteIcon from '@material-ui/icons/Delete';
+// import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from "@material-ui/core/styles";
 import { CardContent, Popover } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
@@ -54,8 +54,8 @@ const ListCard = ({ text }) => {
       <p style={styles.modalSubTitle}>Progress</p>
       <input style={styles.modalInput2}></input>
       <div style={styles.buttonContainer}>
-          <button>Cancel</button>
-          <button>Save Task</button>
+          <button style={styles.buttonCancel}>Cancel</button>
+          <button style={styles.buttonSave}>Save Task</button>
       </div>
     </div>
   );
@@ -148,7 +148,8 @@ const styles = {
   modalSubTitle : {
     fontSize: '12px',
     lineHeight : '16px',
-    margin : '4px 0px'
+    margin : '4px 0px',
+    color : '#5D6372'
   },
   modalInput1 : {
       minWidth : '500px',
@@ -172,6 +173,20 @@ const styles = {
     marginTop : '50px',
     display: 'flex',
     justifyContent : 'flex-end'
+  },
+  buttonSave: {
+    width : '77px',
+    height: '32px',
+    backgroundColor : '#27AE60',
+    border : '1px solid #27AE60',
+    color : '#FFFFFF',
+    marginLeft : '8px'
+  },
+  buttonCancel : {
+    width : '77px',
+    height: '32px',
+    backgroundColor : '#FFFFFF',
+    border : '1px solid #D9D9D9'
   }
 };
 
