@@ -2,7 +2,7 @@ import React from 'react'
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import MoreHoriz from "@material-ui/icons/MoreHoriz"
-import { CardContent,CardActions, Popover } from '@material-ui/core';
+import { CardContent, Popover } from '@material-ui/core';
 
 const ListCard = ({text}) => {
     return (
