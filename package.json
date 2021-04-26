@@ -1,7 +1,6 @@
 {
   "name": "frontendtestzalent",
   "version": "0.1.0",
-  "homepage": "https://cocky-joliot-632e10.netlify.app/v1",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.3",
