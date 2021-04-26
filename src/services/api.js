@@ -15,9 +15,9 @@ function login(email, password){
     axios.post("/auth/login", {email,password}).then(res => res)
     )
 }
-function register(username, email,password){
+function register(name, email,password,password_confirmation){
     return (
-    axios.post("/auth/login", {username,email,password}).then(res => res)
+    axios.post("/signup", {name,email,password,password_confirmation}).then(res => res)
     )
 }
 function getList(){

@@ -1,6 +1,8 @@
+// import List from "../components/List";
 import { CONSTANTS } from "../_constants";
 
-const listID = 2;
+let listID = 2;
+let cardID = 4
 
 const initialState = [
   {
@@ -66,8 +68,26 @@ const listsReducer = (state = initialState, action) => {
         cards: [],
         id: listID,
       };
-    //   listID += 1;
+      listID += 1;
       return [...state, newList];
+
+      case CONSTANTS.ADD_CARD:
+          const newCard = {
+              text : action.payload.text,
+              id : cardID
+          }
+          cardID += 1;
+          state.map(list => {
+              if(list.id === action.payload.id){
+                return {
+                    ...list,
+                    cards : [...list.cards, newCard]
+                }
+              }else {
+                  return list;
+              }
+          })
+          break;
     default:
       return state;
   }

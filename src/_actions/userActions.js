@@ -4,7 +4,8 @@ import { userService} from "../services";
 export const userActions = {
   login,
   getList,
-  addList
+  addList,
+  register
 }
 
 function login(username, password) {
@@ -12,6 +13,10 @@ function login(username, password) {
     dispatch(request({username}));
 
     userService.login(username,password).then(user => {
+      console.log('user',user)
+      if (user.data.auth_token){
+        localStorage.setItem('user_token',user.data.auth_token)
+      }
       dispatch(success(user))
     },
     error => {
@@ -24,6 +29,26 @@ function login(username, password) {
   function request(user) { return { type: CONSTANTS.LOGIN_REQUEST, user } }
   function success(user) { return { type: CONSTANTS.LOGIN_SUCCESS, user } }
   function failure(error) { return { type: CONSTANTS.LOGIN_FAILURE, error } }
+}
+function register(username, email, password, password_confirmation) {
+  return dispatch => {
+    // dispatch(request({username}));
+
+    userService.register(username, email, password, password_confirmation).then(user => {
+      
+      // if (user.data.auth_token){
+      //   localStorage.setItem('user_token',user.data.auth_token)
+      // }
+      // dispatch(success(user))
+    },
+    error => {
+      // dispatch(failure(error.toString()));
+     
+  }
+  )
+    
+  }
+
 }
 function getList(){
   return dispatch => {
