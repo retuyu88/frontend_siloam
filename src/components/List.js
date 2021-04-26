@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+import React from "react";
 import ListCard from "./ListCard";
 import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { connect, useDispatch } from "react-redux";
+import { connect} from "react-redux";
 // import { listActions } from "../_actions";
-import { addList } from "../_actions/listActions";
+// import { addList } from "../_actions/listActions";
 
 const ListContainer = ({ title, cards, id }) => {
-  const [text] = useState(0);
+//   const [text] = useState(0);
   function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -34,13 +35,13 @@ const ListContainer = ({ title, cards, id }) => {
     setOpen(false);
   };
  
-  const HandleAddList = () => {
-    const dispatch = useDispatch();
-    if (text) {
-      dispatch(addList(text));
-    }
-    return;
-  };
+//   const HandleAddList = () => {
+//     const dispatch = useDispatch();
+//     if (text) {
+//       dispatch(addList(text));
+//     }
+//     return;
+//   };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -51,7 +52,7 @@ const ListContainer = ({ title, cards, id }) => {
       <input style={styles.modalInput2}></input>
       <div style={styles.buttonContainer}>
         <button style={styles.buttonCancel}>Cancel</button>
-        <button onMouseDown={HandleAddList} style={styles.buttonSave}>
+        <button style={styles.buttonSave}>
           Save Task
         </button>
       </div>
@@ -248,8 +249,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const mapStateToProps = (state) => ({
-  lists: state.lists,
-});
+// const mapStateToProps = (state) => ({
+//   lists: state.lists,
+// });
 
 export default connect()(ListContainer);
