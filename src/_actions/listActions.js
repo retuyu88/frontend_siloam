@@ -1,6 +1,9 @@
+import { CONSTANTS } from "../_constants";
+
 export const addList = title => {
     
     return {
-        title
+        type : CONSTANTS.ADD_LIST,
+        payload : title
     }
 }

@@ -10,6 +10,7 @@ const initialState = [
       {
         id: 0,
         name: " redesign page",
+
       },
       {
         id: 1,
@@ -61,11 +62,11 @@ const listsReducer = (state = initialState, action) => {
   switch (action.type) {
     case CONSTANTS.ADD_LIST:
       const newList = {
-        title: action.payload.title,
+        title: action.payload,
         cards: [],
         id: listID,
       };
-      listID += 1;
+    //   listID += 1;
       return [...state, newList];
     default:
       return state;
