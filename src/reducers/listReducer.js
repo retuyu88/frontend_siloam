@@ -60,37 +60,17 @@ const initialState = [
   },
 ];
 
-const listsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case CONSTANTS.ADD_LIST:
-      const newList = {
-        title: action.payload,
-        cards: [],
-        id: listID,
-      };
-      listID += 1;
-      return [...state, newList];
 
-      case CONSTANTS.ADD_CARD:
-          const newCard = {
-              text : action.payload.text,
-              id : cardID
-          }
-          cardID += 1;
-          state.map(list => {
-              if(list.id === action.payload.id){
-                return {
-                    ...list,
-                    cards : [...list.cards, newCard]
-                }
-              }else {
-                  return list;
-              }
-          })
-          break;
+const listsReducer = (state = initialState, {type,payload}) => {
+  switch (type) {
+    case CONSTANTS.SET_LIST:
+      return state
+  
     default:
       return state;
   }
 };
+
+
 
 export default listsReducer;

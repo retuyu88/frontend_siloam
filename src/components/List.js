@@ -62,7 +62,7 @@ const ListContainer = ({ title, cards, listId }) => {
   return (
     <Droppable droppableId={String(listId)}>
       {(provided) => (
-        <div
+        <div 
           {...provided.droppableProps}
           ref={provided.innerRef}
           style={
