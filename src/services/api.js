@@ -8,7 +8,10 @@ export const userService = {
     login,
     register,
     getList,
-    getItemList
+    getItemList,
+    postItemList,
+    deleteList,
+    editList
 }
 
 
@@ -41,4 +44,34 @@ function getItemList(id){
         console.error(error)
       })
     )
+}
+function postItemList(id,name,progress_percentage){
+  return (
+  axios.post(`/todos/${id}/items`,{name,progress_percentage}, {headers : {Authorization: token}}).then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  )
+}
+function deleteList(id,todoId){
+  return (
+  axios.delete(`/todos/${todoId}/items/${id}`, {headers : {Authorization: token}}).then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  )
+}
+function editList(id,todoId,target_todo_id,name){
+  return (
+  axios.put(`/todos/${todoId}/items/${id}`,{target_todo_id,name}, {headers : {Authorization: token}}).then((res) => {
+      return res.data
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  )
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import MoreHoriz from "@material-ui/icons/MoreHoriz";
@@ -12,12 +12,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CardContent, Popover } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { Draggable } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
+import { setSubProducts } from "../_actions/listActions";
+import { userService } from "../services";
+
 
 const ListCard = ({ data, index,cardId }) => {
   //   function rand() {
   //     return Math.round(Math.random() * 20) - 10;
   //   }
-
+  const[name, setName] = useState(data.name);
+  const[target, setTarget] = useState(data.todo_id);
+  const [percentage, setPercentage] = useState(0);
+  
+  const dispatch = useDispatch();
   function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -45,6 +53,34 @@ const ListCard = ({ data, index,cardId }) => {
   const handleOpenDelete = () => {
     setOpenDelete(true);
   };
+//   const handleClick = () => {
+//     dispatch(logout());
+// }
+const handleChange = event => {
+  setName(event.target.value)
+  }
+  const handleChange2 = event => {
+    setPercentage(event.target.value)
+    }
+    const handleChange3 = num => {
+      setTarget(num)
+      }
+const deleteCard = () => {
+  
+  userService.deleteList(data.id,data.todo_id)
+    .then((res) => res.json())
+    .then((result) => dispatch(setSubProducts(result)))
+    .catch((err) => console.log('error',err))
+    handleClose()
+}
+const editCard = () => {
+  userService.editList(data.id,data.todo_id,target,name)
+    .then((res) => res.json())
+    .then((result) => dispatch(setSubProducts(result)))
+    .catch((err) => console.log('error',err))
+    handleClose()
+    
+}
 
   const handleModalClose = () => {
     setOpen(false);
@@ -52,19 +88,20 @@ const ListCard = ({ data, index,cardId }) => {
   const handleModalDeleteClose = () => {
     setOpenDelete(false);
   };
+ 
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <span style={styles.modalTitle}>Edit Task</span>
       <span style={styles.modalSubTitle}>Task Name</span>
-      <input style={styles.modalInput1}></input>
+      <input style={styles.modalInput1} value = {name} onChange = {handleChange}></input>
       <p style={styles.modalSubTitle}>Progress</p>
-      <input style={styles.modalInput2}></input>
+      <input style={styles.modalInput2} value = {percentage} onChange = {handleChange2} ></input>
       <div style={styles.buttonContainer}>
         <button onClick={handleModalClose} style={styles.buttonCancel}>
           Cancel
         </button>
-        <button style={styles.buttonSave}>Save Task</button>
+        <button style={styles.buttonSave} onClick={editCard}>Save Task</button>
       </div>
     </div>
   );
@@ -80,7 +117,7 @@ const ListCard = ({ data, index,cardId }) => {
         <button onClick={handleModalDeleteClose} style={styles.buttonCancel}>
           Cancel
         </button>
-        <button style={styles.buttonDelete}>Delete</button>
+        <button style={styles.buttonDelete} onClick={deleteCard}>Delete</button>
       </div>
     </div>
   );
@@ -124,10 +161,10 @@ const ListCard = ({ data, index,cardId }) => {
                   >
                     <Typography className={classes.typography}>
                       <Button className={classes.buttonNav}>
-                        <ArrowBackIcon></ArrowBackIcon>Move Left
+                        <ArrowBackIcon onClick={handleChange3(1)}></ArrowBackIcon>Move Left
                       </Button>
                       <Button className={classes.buttonNav}>
-                        <ArrowForwardIcon></ArrowForwardIcon>Move Right
+                        <ArrowForwardIcon onClick={handleChange3(0)}></ArrowForwardIcon>Move Right
                       </Button>
                       <Button
                         className={classes.buttonNav}

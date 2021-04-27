@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,17 +9,25 @@ import { Droppable } from "react-beautiful-dnd";
 import { userService } from "../services";
 import  ListCard  from "./ListCard";
 import { setSubProducts } from "../_actions/listActions";
+// import { addSubList } from "../_actions/listActions";
 
 
 const ListContainer = ({ data, listId }) => {
   
    const dispatch = useDispatch()
    const [subData, setCount] = useState([]);
+   const[name, setName] = useState("");
+ const [percentage, setPercentage] = useState(0);
+
   //  const effect = useEffect()
-  userService.getItemList(data.id).then((res) => {
-    console.log("res",res)
-    setCount(res)
-    dispatch(setSubProducts(res))})
+
+   useEffect(() => {
+    userService.getItemList(data.id).then((res) => {
+      console.log("res",res)
+      setCount(res)
+      dispatch(setSubProducts(res))})
+    
+  }, [])
   
 
   // const subCard = useSelector((state) => state.listsReducer.subProducts)
@@ -59,18 +67,36 @@ const ListContainer = ({ data, listId }) => {
   //     }
   //     return;
   //   };
-
+  const handleSubmit = (event) => {
+    // event.preventDefault()
+    add()
+    
+  }
+  const handleChange = event => {
+    setName(event.target.value)
+    }
+    const handleChange2 = event => {
+      setPercentage(event.target.value)
+      }
+ 
+  const add = () => {
+    userService.postItemList(data.id,name,percentage)
+      .then((res) => res.json())
+      .then((result) => dispatch(setSubProducts(result)))
+      .catch((err) => console.log('error',err))
+      handleClose()
+  }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <span style={styles.modalTitle}>Create Task</span>
       <span style={styles.modalSubTitle}>Task Name</span>
-      <input style={styles.modalInput1}></input>
+      <input style={styles.modalInput1} value = {name} onChange = {handleChange}></input>
       <p style={styles.modalSubTitle}>Progress</p>
-      <input style={styles.modalInput2}></input>
+      <input style={styles.modalInput2} value = {percentage} onChange = {handleChange2}></input>
       <div style={styles.buttonContainer}>
         <button style={styles.buttonCancel}>Cancel</button>
-        <button style={styles.buttonSave}>
+        <button style={styles.buttonSave} onClick={handleSubmit}>
           Save Task
         </button>
       </div>

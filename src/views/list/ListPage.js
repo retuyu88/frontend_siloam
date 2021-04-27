@@ -17,7 +17,8 @@ import { getLists,getListsError,getListsPending,getSubLists} from "../../reducer
 class ListPage extends React.Component {
   onDragEnd = (result) => {
     //reordering logic
-    const { destination, source, draggableId} = result
+    const { destination} = result
+    // const { destination, source, draggableId} = result
     
     if (!destination){
       return
@@ -36,8 +37,8 @@ class ListPage extends React.Component {
 
   }
   shouldComponentRender() {
-    const {pending} = this.props;
-    if(this.pending === false) return false;
+    // const {pending} = this.props;
+    // if(this.pending === false) return false;
     // more tests
     return true;
 }

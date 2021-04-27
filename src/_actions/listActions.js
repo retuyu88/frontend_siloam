@@ -6,6 +6,7 @@ export const SET_LIST_ERROR = 'SET_LIST_ERROR';
 export const SET_SUB_LIST_PENDING = 'SET_SUB_LIST_PENDING';
 export const SET_SUB_LIST_SUCCESS = 'SET_SUB_LIST_SUCCESS';
 export const SET_SUB_LIST_ERROR = 'SET_SUB_LIST_ERROR';
+export const ADD_SUB_LIST = 'ADD_SUB_LIST';
 
 function getListsPending() {
     return {
@@ -26,6 +27,13 @@ export const setSubProducts = (subProducts) => {
         subProducts: subProducts
     }
 }
+export const addSubList = (product) => {
+    return {
+        type: SET_SUB_LIST_SUCCESS,
+    
+    }
+}
+
 
 function getListsError(error) {
     return {
@@ -72,6 +80,17 @@ function getListsError(error) {
         })
       }
   }
+  export const addList = () => (dispatch, id,data) => {
+    userService.postItemList(id,data)
+      .then(res => {
+        dispatch({
+          type: ADD_SUB_LIST
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
 //   function getSubList(id){
 //     return dispatch => {

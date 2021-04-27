@@ -6,14 +6,16 @@ import {
   SET_LIST_ERROR,
   SET_SUB_LIST_ERROR,
   SET_SUB_LIST_PENDING,
-  SET_SUB_LIST_SUCCESS
+  SET_SUB_LIST_SUCCESS,
+  ADD_SUB_LIST
 } from "../_actions/listActions";
 
 const listInitialState = {
   pending: false,
     products: [],
     subProducts: [],
-    error: null
+    error: null,
+    count: null
 }
 // const subListInitialState = {
 //   pending: false,
@@ -48,6 +50,12 @@ export function listsReducer(listState = listInitialState, action) {
         pending: false,
         error: action.error,
       };
+      case ADD_SUB_LIST:
+        console.log("HERE")
+      return {
+        ...listState,
+        count: action.product
+      }
     default:
       return listState;
   }
