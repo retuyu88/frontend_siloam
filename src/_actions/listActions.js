@@ -33,26 +33,26 @@ function getListsError(error) {
         error: error
     }
 }
-function getSubListsPending() {
-    return {
-        type: SET_LIST_PENDING
-    }
-}
+// function getSubListsPending() {
+//     return {
+//         type: SET_LIST_PENDING
+//     }
+// }
 
-function getSubListsSuccess(subProducts) {
-    // console.log("here",products)
-    return {
-        type: SET_LIST_SUCCESS,
-        subProducts: subProducts
-    }
-}
+// function getSubListsSuccess(subProducts) {
+//     // console.log("here",products)
+//     return {
+//         type: SET_LIST_SUCCESS,
+//         subProducts: subProducts
+//     }
+// }
 
-function getSubListsError(error) {
-    return {
-        type: SET_LIST_ERROR,
-        error: error
-    }
-}
+// function getSubListsError(error) {
+//     return {
+//         type: SET_LIST_ERROR,
+//         error: error
+//     }
+// }
 
   function getList(){
       return dispatch => {
@@ -73,23 +73,23 @@ function getSubListsError(error) {
       }
   }
 
-  function getSubList(id){
-    return dispatch => {
-        dispatch(getSubListsPending());
-        userService.getItemList(id)
-        .then(res => {
+//   function getSubList(id){
+//     return dispatch => {
+//         dispatch(getSubListsPending());
+//         userService.getItemList(id)
+//         .then(res => {
             
-            if(res.error){
-                throw(res.error)
-            }
+//             if(res.error){
+//                 throw(res.error)
+//             }
 
-            dispatch(getSubListsSuccess(res));
-            return res
-        })
-        .catch(error => {
-          dispatch(getSubListsError(error));
-      })
-    }
-}
+//             dispatch(getSubListsSuccess(res));
+//             return res
+//         })
+//         .catch(error => {
+//           dispatch(getSubListsError(error));
+//       })
+//     }
+// }
 
   export default getList;

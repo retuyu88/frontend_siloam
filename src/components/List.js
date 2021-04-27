@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-import React,{useEffect,useState} from "react";
+import React,{useState} from "react";
 import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,12 +16,11 @@ const ListContainer = ({ data, listId }) => {
    const dispatch = useDispatch()
    const [subData, setCount] = useState([]);
   //  const effect = useEffect()
-   useEffect(() => {
-    userService.getItemList(data.id).then((res) => {
-      console.log("res",res)
-      setCount(res)
-      dispatch(setSubProducts(res))})
-  }, []);
+  userService.getItemList(data.id).then((res) => {
+    console.log("res",res)
+    setCount(res)
+    dispatch(setSubProducts(res))})
+  
 
   // const subCard = useSelector((state) => state.listsReducer.subProducts)
   console.log('subCard',subData)
