@@ -27,7 +27,7 @@ const ListContainer = ({ data, listId }) => {
       setCount(res)
       dispatch(setSubProducts(res))})
     
-  }, [])
+  }, [data.id,dispatch])
   
 
   // const subCard = useSelector((state) => state.listsReducer.subProducts)
