@@ -1,18 +1,34 @@
 // import React, { useState } from "react";
-import React from "react";
-import ListCard from "./ListCard";
+import React,{useEffect,useState} from "react";
 import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { connect, useDispatch,useSelector } from "react-redux";
+import { connect,useDispatch} from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
-import { addList } from "../_actions/listActions";
+import { userService } from "../services";
+import  ListCard  from "./ListCard";
+import { setSubProducts } from "../_actions/listActions";
 
 
 const ListContainer = ({ data, listId }) => {
-    const list = useSelector((state) => state.lists);
-   
+  
+   const dispatch = useDispatch()
+   const [subData, setCount] = useState([]);
+  //  const effect = useEffect()
+   useEffect(() => {
+    userService.getItemList(data.id).then((res) => {
+      console.log("res",res)
+      setCount(res)
+      dispatch(setSubProducts(res))})
+  }, []);
+
+  // const subCard = useSelector((state) => state.listsReducer.subProducts)
+  console.log('subCard',subData)
+  // const realSub = subCard.filter(function(res) {return res.todo_id == data.id})
+  
+  // console.log('sublist',subList)
+
   function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -44,7 +60,7 @@ const ListContainer = ({ data, listId }) => {
   //     }
   //     return;
   //   };
-  const dispatch = useDispatch();
+
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -61,6 +77,7 @@ const ListContainer = ({ data, listId }) => {
       </div>
     </div>
   );
+  
   return (
     <Droppable droppableId={String(listId)}>
       {(provided) => (
@@ -99,16 +116,16 @@ const ListContainer = ({ data, listId }) => {
               </span>
             </div>
           </div>
-          {/* {cards.map((card, index) => (
+          {subData.map((card, index) => (
             
               <ListCard
                 key={card.id}
                 index={index}
-                text={card.name}
+                data={card}
                 cardId={card.id}
               ></ListCard>
             
-          ))} */}
+          ))}
 
           <button style={styles.invisButton} onClick={handleOpen}>
             <ActionButton></ActionButton>

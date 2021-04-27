@@ -13,7 +13,7 @@ import { CardContent, Popover } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { Draggable } from "react-beautiful-dnd";
 
-const ListCard = ({ text, index,cardId }) => {
+const ListCard = ({ data, index,cardId }) => {
   //   function rand() {
   //     return Math.round(Math.random() * 20) - 10;
   //   }
@@ -100,7 +100,7 @@ const ListCard = ({ text, index,cardId }) => {
           <Card style={styles.cardContainer}>
             <CardContent>
               <Typography style={styles.task} gutterBottom>
-                {text}
+                {data.name}
               </Typography>
               <div>
                 <div style={styles.bottom}>

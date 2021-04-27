@@ -3,6 +3,9 @@ import { userService} from "../services";
 export const SET_LIST_PENDING = 'SET_LIST_PENDING';
 export const SET_LIST_SUCCESS = 'SET_LIST_SUCCESS';
 export const SET_LIST_ERROR = 'SET_LIST_ERROR';
+export const SET_SUB_LIST_PENDING = 'SET_SUB_LIST_PENDING';
+export const SET_SUB_LIST_SUCCESS = 'SET_SUB_LIST_SUCCESS';
+export const SET_SUB_LIST_ERROR = 'SET_SUB_LIST_ERROR';
 
 function getListsPending() {
     return {
@@ -17,6 +20,12 @@ function getListsSuccess(products) {
         products: products
     }
 }
+export const setSubProducts = (subProducts) => {
+    return {
+        type: SET_SUB_LIST_SUCCESS,
+        subProducts: subProducts
+    }
+}
 
 function getListsError(error) {
     return {
@@ -24,21 +33,28 @@ function getListsError(error) {
         error: error
     }
 }
-function register(name, email, password, password_confirmation) {
-    return dispatch => {
-      // dispatch(request({username}));
-  
-      userService.register(name, email, password, password_confirmation).then(user => {
-      },
-      error => {
-       
+function getSubListsPending() {
+    return {
+        type: SET_LIST_PENDING
     }
-    )
-      
+}
+
+function getSubListsSuccess(subProducts) {
+    // console.log("here",products)
+    return {
+        type: SET_LIST_SUCCESS,
+        subProducts: subProducts
     }
-  
-  }
-  function getlist(){
+}
+
+function getSubListsError(error) {
+    return {
+        type: SET_LIST_ERROR,
+        error: error
+    }
+}
+
+  function getList(){
       return dispatch => {
           dispatch(getListsPending());
           userService.getList()
@@ -56,30 +72,24 @@ function register(name, email, password, password_confirmation) {
         })
       }
   }
-  export default getlist;
-//   function fetchProducts() {
-//       return dispatch => {
-//           dispatch(fetchProductsPending());
-//           fetch('https://exampleapi.com/products')
-//           .then(res => res.json())
-//           .then(res => {
-//               if(res.error) {
-//                   throw(res.error);
-//               }
-//               dispatch(fetchProductsSuccess(res.products);
-//               return res.products;
-//           })
-//           .catch(error => {
-//               dispatch(fetchProductsError(error));
-//           })
-//       }
-//   }
-  
-//   export default fetchProducts;
 
-// export const selectedList = (list) => {
-//     return {
-//         type : CONSTANTS.SELECTED_LIST,
-//         payload : list
-//     }
-// }
+  function getSubList(id){
+    return dispatch => {
+        dispatch(getSubListsPending());
+        userService.getItemList(id)
+        .then(res => {
+            
+            if(res.error){
+                throw(res.error)
+            }
+
+            dispatch(getSubListsSuccess(res));
+            return res
+        })
+        .catch(error => {
+          dispatch(getSubListsError(error));
+      })
+    }
+}
+
+  export default getList;

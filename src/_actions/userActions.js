@@ -3,8 +3,6 @@ import { userService} from "../services";
 
 export const userActions = {
   login,
-  getList,
-  addList,
   register
 }
 
@@ -49,20 +47,4 @@ function register(name, email, password, password_confirmation) {
     
   }
 
-}
-function getList(){
-  return dispatch => {
-    userService.getList().then(list => {
-      return list
-    })
-  }
-}
-
-function addList(){
-  console.log("HEREE")
-  return dispatch => {
-    userService.getList().then(list => {
-      return list
-    })
-  }
 }

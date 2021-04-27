@@ -4,20 +4,17 @@ import logo from "../../assets/logo.png";
 import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 import { bindActionCreators } from 'redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 // import { userService } from "../../services";
 // import {lists} from "../../reducers";
+import { userService } from "../../services";
 
 import fetchListActions from "../../_actions/listActions";
 
-import { getLists,getListsError,getListsPending } from "../../reducers/listReducer";
+import { getLists,getListsError,getListsPending,getSubLists} from "../../reducers/listReducer";
 
 
 class ListPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.shouldComponentRender = this.shouldComponentRender.bind(this);
-}
   onDragEnd = (result) => {
     //reordering logic
     const { destination, source, draggableId} = result
@@ -30,18 +27,25 @@ class ListPage extends React.Component {
   componentWillMount(){
     const {fetchList} = this.props
     fetchList()
-    console.log(' sini')
-  //   const {dataList} = this.props;
-  //       dataList();
-  //   const response = userService.getList()
-  //   response.then(function(result) {
-      
-  //  })
+  
+  
   }
+  getEveryList(id){
+    const val = userService.getItemList(id)
+    return val
+
+  }
+  shouldComponentRender() {
+    const {pending} = this.props;
+    if(this.pending === false) return false;
+    // more tests
+    return true;
+}
   render() {
-    const {lists, error, pending} = this.props;
+    const {lists} = this.props;
+    if(!this.shouldComponentRender()) return <CircularProgress />
     
-    console.log(lists)
+    
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
       <div style={styles.listPage}>
@@ -50,15 +54,14 @@ class ListPage extends React.Component {
           <div style={styles.mainTitle}>Product Roadmap</div>
           <div style={styles.listContainers}>
             {lists.map((list, i) => 
-              (
-                <ListContainer
-                  key={list.id}
-                  data = {list}
-                  // title={list.title}
-                  // cards={list.cards}
-                  listId = {i}
-                ></ListContainer>
-              )
+                (
+                  <ListContainer
+                    key={list.id}
+                    data = {list}
+                    listId = {i}
+                  ></ListContainer>
+                )
+
             )}
             
 {/*             
@@ -143,7 +146,8 @@ mainTitle : {
 const mapStateToProps = (state) => ({
   error: getListsError(state),
   lists: getLists(state),
-  pending: getListsPending(state)
+  pending: getListsPending(state),
+  subLists : getSubLists(state)
 
 });
 const mapDispatchToProps = dispatch => bindActionCreators({

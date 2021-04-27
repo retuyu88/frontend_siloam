@@ -1,5 +1,5 @@
 import axios from 'axios';
-import authHeader from "./authHeader";
+// import authHeader from "./authHeader";
 axios.defaults.baseURL = 'https://todos-project-api.herokuapp.com'
 const token = localStorage.getItem("user_token")
 console.log('token',token)
@@ -34,6 +34,11 @@ async function getList(){
 }
 function getItemList(id){
     return (
-    axios.post(`/todos/${id}/items`, {headers : authHeader()}).then(res => res)
+    axios.get(`/todos/${id}/items`, {headers : {Authorization: token}}).then((res) => {
+        return res.data
+      })
+      .catch((error) => {
+        console.error(error)
+      })
     )
 }
