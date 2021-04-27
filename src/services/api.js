@@ -1,6 +1,8 @@
 import axios from 'axios';
 import authHeader from "./authHeader";
 axios.defaults.baseURL = 'https://todos-project-api.herokuapp.com'
+const token = localStorage.getItem("user_token")
+console.log('token',token)
 
 export const userService = {
     login,
@@ -20,9 +22,14 @@ function register(name, email,password,password_confirmation){
     axios.post("/signup", {name,email,password,password_confirmation}).then(res => res)
     )
 }
-function getList(){
+async function getList(){
     return (
-    axios.post("/todos", {headers : authHeader()}).then(res => res)
+    axios.get("/todos", { headers: { Authorization: token } }).then((res) => {
+        return res.data
+      })
+      .catch((error) => {
+        console.error(error)
+      })
     )
 }
 function getItemList(id){

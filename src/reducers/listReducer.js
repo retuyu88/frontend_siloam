@@ -1,76 +1,43 @@
 // import List from "../components/List";
 import { CONSTANTS } from "../_constants";
+import {
+  SET_LIST_PENDING,
+  SET_LIST_SUCCESS,
+  SET_LIST_ERROR,
+} from "../_actions/listActions";
 
-let listID = 2;
-let cardID = 4
+const listInitialState = {
+  pending: false,
+    products: [],
+    error: null
+}
 
-const initialState = [
-  {
-    title: "Ongoing",
-    id: `list-${0}`,
-    cards: [
-      {
-        id: `card-${0}`,
-        name: " redesign page",
-
-      },
-      {
-        id: `card-${1}`,
-        name: " redesign page",
-      },
-      {
-        id: `card-${2}`,
-        name: " redesign page",
-      },
-      {
-        id: `card-${3}`,
-        name: " redesign page",
-      },
-    ],
-  },
-  {
-    title: "Process",
-    id: `list-${1}`,
-    cards: [
-      {
-        id: `card-${0}`,
-        name: " redesign page",
-      },
-    ],
-  },
-  {
-    title: "Stagging",
-    id: `list-${2}`,
-    cards: [
-      {
-        id: `card-${0}`,
-        name: " redesign page",
-      },
-    ],
-  },
-  {
-    title: "Production",
-    id: `list-${3}`,
-    cards: [
-      {
-        id: `card-${0}`,
-        name: " redesign page",
-      },
-    ],
-  },
-];
-
-
-const listsReducer = (state = initialState, {type,payload}) => {
-  switch (type) {
-    case CONSTANTS.SET_LIST:
-      return state
-  
+export function listsReducer(listState = listInitialState, action) {
+  switch (action.type) {
+    case SET_LIST_PENDING:
+      return {
+        ...listState,
+        pending: true,
+      };
+    case SET_LIST_SUCCESS:
+      // console.log("HERE",action.payload)
+      return {
+        ...listState,
+        pending: false,
+        products: action.products,
+      };
+    case SET_LIST_ERROR:
+      return {
+        ...listState,
+        pending: false,
+        error: action.error,
+      };
     default:
-      return state;
+      return listState;
   }
-};
+}
+export const getLists = (listState) => listState.listsReducer.products;
+export const getListsPending = (listState) => listState.listsReducer.pending;
+export const getListsError = (listState) => listState.listsReducer.error;
 
-
-
-export default listsReducer;
+// export default listsReducer;

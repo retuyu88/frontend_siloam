@@ -3,13 +3,45 @@ import ListContainer from "../../components/List";
 import logo from "../../assets/logo.png";
 import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
+import { bindActionCreators } from 'redux';
+// import { userService } from "../../services";
+// import {lists} from "../../reducers";
+
+import fetchListActions from "../../_actions/listActions";
+
+import { getLists,getListsError,getListsPending } from "../../reducers/listReducer";
+
 
 class ListPage extends React.Component {
-  onDragEnd = () => {
+  constructor(props) {
+    super(props);
+
+    // this.shouldComponentRender = this.shouldComponentRender.bind(this);
+}
+  onDragEnd = (result) => {
     //reordering logic
+    const { destination, source, draggableId} = result
+    
+    if (!destination){
+      return
+    }
+
+  }
+  componentWillMount(){
+    const {fetchList} = this.props
+    fetchList()
+    console.log(' sini')
+  //   const {dataList} = this.props;
+  //       dataList();
+  //   const response = userService.getList()
+  //   response.then(function(result) {
+      
+  //  })
   }
   render() {
-    const { lists } = this.props;
+    const {lists, error, pending} = this.props;
+    
+    console.log(lists)
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
       <div style={styles.listPage}>
@@ -21,12 +53,14 @@ class ListPage extends React.Component {
               (
                 <ListContainer
                   key={list.id}
-                  title={list.title}
-                  cards={list.cards}
+                  data = {list}
+                  // title={list.title}
+                  // cards={list.cards}
                   listId = {i}
                 ></ListContainer>
               )
             )}
+            
 {/*             
             <ListContainer style={styles.container,styles.container1}
               title={lists[0].title}
@@ -107,8 +141,14 @@ mainTitle : {
 };
 
 const mapStateToProps = (state) => ({
-  lists: state.lists,
+  error: getListsError(state),
+  lists: getLists(state),
+  pending: getListsPending(state)
+
 });
+const mapDispatchToProps = dispatch => bindActionCreators({
+  fetchList : fetchListActions
+}, dispatch)
 
 
-export default connect(mapStateToProps)(ListPage);
+export default connect(mapStateToProps,mapDispatchToProps)(ListPage);

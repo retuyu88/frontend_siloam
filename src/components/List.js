@@ -5,12 +5,14 @@ import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch,useSelector } from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
 import { addList } from "../_actions/listActions";
 
-const ListContainer = ({ title, cards, listId }) => {
-  //   const [text] = useState(0);
+
+const ListContainer = ({ data, listId }) => {
+    const list = useSelector((state) => state.lists);
+   
   function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -53,7 +55,7 @@ const ListContainer = ({ title, cards, listId }) => {
       <input style={styles.modalInput2}></input>
       <div style={styles.buttonContainer}>
         <button style={styles.buttonCancel}>Cancel</button>
-        <button onClick={() => dispatch(addList)} style={styles.buttonSave}>
+        <button style={styles.buttonSave}>
           Save Task
         </button>
       </div>
@@ -88,22 +90,16 @@ const ListContainer = ({ title, cards, listId }) => {
                     : styles.task4
                 }
               >
-                Group Task {listId}
+                {data.title}
               </span>
             </div>
             <div style={styles.dateContainer}>
               <span style={styles.date}>
-                {listId === 0
-                  ? "January - March"
-                  : listId === 1
-                  ? "April - June "
-                  : listId === 2
-                  ? "July - September"
-                  : "October - Desember"}
+                {data.description}
               </span>
             </div>
           </div>
-          {cards.map((card, index) => (
+          {/* {cards.map((card, index) => (
             
               <ListCard
                 key={card.id}
@@ -112,7 +108,7 @@ const ListContainer = ({ title, cards, listId }) => {
                 cardId={card.id}
               ></ListCard>
             
-          ))}
+          ))} */}
 
           <button style={styles.invisButton} onClick={handleOpen}>
             <ActionButton></ActionButton>
