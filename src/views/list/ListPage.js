@@ -17,16 +17,16 @@ class ListPage extends React.Component {
         <div style={styles.rightpanel}>
           <div style={styles.mainTitle}>Product Roadmap</div>
           <div style={styles.listContainers}>
-            {lists.map((list, i) => {
-              return (
+            {lists.map((list, i) => 
+              (
                 <ListContainer
-                  key={i}
+                  key={list.id}
                   title={list.title}
                   cards={list.cards}
-                  id = {list.id}
+                  listId = {i}
                 ></ListContainer>
-              );
-            })}
+              )
+            )}
 {/*             
             <ListContainer style={styles.container,styles.container1}
               title={lists[0].title}

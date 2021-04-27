@@ -30,11 +30,11 @@ function login(username, password) {
   function success(user) { return { type: CONSTANTS.LOGIN_SUCCESS, user } }
   function failure(error) { return { type: CONSTANTS.LOGIN_FAILURE, error } }
 }
-function register(username, email, password, password_confirmation) {
+function register(name, email, password, password_confirmation) {
   return dispatch => {
     // dispatch(request({username}));
 
-    userService.register(username, email, password, password_confirmation).then(user => {
+    userService.register(name, email, password, password_confirmation).then(user => {
       
       // if (user.data.auth_token){
       //   localStorage.setItem('user_token',user.data.auth_token)

@@ -5,12 +5,12 @@ import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { connect, useDispatch} from "react-redux";
-// import { listActions } from "../_actions";
+import { connect, useDispatch } from "react-redux";
+import { Droppable } from "react-beautiful-dnd";
 import { addList } from "../_actions/listActions";
 
-const ListContainer = ({ title, cards, id }) => {
-//   const [text] = useState(0);
+const ListContainer = ({ title, cards, listId }) => {
+  //   const [text] = useState(0);
   function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -34,15 +34,15 @@ const ListContainer = ({ title, cards, id }) => {
   const handleClose = () => {
     setOpen(false);
   };
- 
-//   const HandleAddList = () => {
-//     const dispatch = useDispatch();
-//     if (text) {
-//       dispatch(addList(text));
-//     }
-//     return;
-//   };
-const dispatch = useDispatch();
+
+  //   const HandleAddList = () => {
+  //     const dispatch = useDispatch();
+  //     if (text) {
+  //       dispatch(addList(text));
+  //     }
+  //     return;
+  //   };
+  const dispatch = useDispatch();
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -60,53 +60,75 @@ const dispatch = useDispatch();
     </div>
   );
   return (
-    <div
-      style={
-        id === 0
-          ? styles.container1
-          : id === 1
-          ? styles.container2
-          : id === 2
-          ? styles.container3
-          : styles.container4
-      }
-    >
-      <div style={styles.title}>
-        <div style={styles.taskContainer}>
-          <span style={ id === 0
-          ? styles.task1
-          : id === 1
-          ? styles.task2
-          : id === 2
-          ? styles.task3
-          : styles.task4}>Group Task {id}</span>
-        </div>
-        <div style={styles.dateContainer}>
-          <span style={styles.date}>{id === 0
-          ? 'January - March'
-          : id === 1
-          ? 'April - June '
-          : id === 2
-          ? 'July - September'
-          : 'October - Desember'}</span>
-        </div>
-      </div>
-      {cards.map((card, i) => {
-        return <ListCard key={i} text={card.name}></ListCard>;
-      })}
+    <Droppable droppableId={String(listId)}>
+      {(provided) => (
+        <div
+          {...provided.droppableProps}
+          ref={provided.innerRef}
+          style={
+            listId === 0
+              ? styles.container1
+              : listId === 1
+              ? styles.container2
+              : listId === 2
+              ? styles.container3
+              : styles.container4
+          }
+        >
+          <div style={styles.title}>
+            <div style={styles.taskContainer}>
+              <span
+                style={
+                  listId === 0
+                    ? styles.task1
+                    : listId === 1
+                    ? styles.task2
+                    : listId === 2
+                    ? styles.task3
+                    : styles.task4
+                }
+              >
+                Group Task {listId}
+              </span>
+            </div>
+            <div style={styles.dateContainer}>
+              <span style={styles.date}>
+                {listId === 0
+                  ? "January - March"
+                  : listId === 1
+                  ? "April - June "
+                  : listId === 2
+                  ? "July - September"
+                  : "October - Desember"}
+              </span>
+            </div>
+          </div>
+          {cards.map((card, index) => (
+            
+              <ListCard
+                key={card.id}
+                index={index}
+                text={card.name}
+                cardId={card.id}
+              ></ListCard>
+            
+          ))}
 
-      <button style={styles.invisButton} onClick={handleOpen}>
-        <ActionButton></ActionButton>
-      </button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-    </div>
+          <button style={styles.invisButton} onClick={handleOpen}>
+            <ActionButton></ActionButton>
+          </button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
+          {provided.placeholder}
+        </div>
+  )}
+    </Droppable>
   );
 };
 
@@ -157,7 +179,7 @@ const styles = {
   },
   title: {},
   invisButton: {
-    marginTop : '10px',
+    marginTop: "10px",
     background: "transparent",
     border: "none",
   },
@@ -246,14 +268,14 @@ const styles = {
     border: "1px solid #27AE60",
     color: "#FFFFFF",
     marginLeft: "8px",
-    borderRadius : '2px'
+    borderRadius: "2px",
   },
   buttonCancel: {
     width: "77px",
     height: "32px",
     backgroundColor: "#FFFFFF",
     border: "1px solid #D9D9D9",
-    borderRadius : '2px'
+    borderRadius: "2px",
   },
 };
 const useStyles = makeStyles((theme) => ({

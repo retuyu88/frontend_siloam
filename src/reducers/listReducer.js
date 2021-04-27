@@ -7,53 +7,53 @@ let cardID = 4
 const initialState = [
   {
     title: "Ongoing",
-    id: 0,
+    id: `list-${0}`,
     cards: [
       {
-        id: 0,
+        id: `card-${0}`,
         name: " redesign page",
 
       },
       {
-        id: 1,
+        id: `card-${1}`,
         name: " redesign page",
       },
       {
-        id: 2,
+        id: `card-${2}`,
         name: " redesign page",
       },
       {
-        id: 3,
+        id: `card-${3}`,
         name: " redesign page",
       },
     ],
   },
   {
     title: "Process",
-    id: 1,
+    id: `list-${1}`,
     cards: [
       {
-        id: 0,
+        id: `card-${0}`,
         name: " redesign page",
       },
     ],
   },
   {
     title: "Stagging",
-    id: 2,
+    id: `list-${2}`,
     cards: [
       {
-        id: 0,
+        id: `card-${0}`,
         name: " redesign page",
       },
     ],
   },
   {
     title: "Production",
-    id: 3,
+    id: `list-${3}`,
     cards: [
       {
-        id: 0,
+        id: `card-${0}`,
         name: " redesign page",
       },
     ],
