@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { userActions } from "../../_actions";
 import '../login/Login.css';
+import { Link } from 'react-router-dom'
 
 class Register extends React.Component {
   constructor(props) {
@@ -83,7 +84,9 @@ class Register extends React.Component {
               alt="loading..."
             />
           )}
+           <Link to="/register" className="btn btn-primary">Login</Link>
         </form>
+        
       </div>
     );
   }
