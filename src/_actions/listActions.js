@@ -29,7 +29,7 @@ export const setSubProducts = (subProducts) => {
 }
 export const addSubList = (product) => {
     return {
-        type: SET_SUB_LIST_SUCCESS,
+        type: ADD_SUB_LIST,
     
     }
 }

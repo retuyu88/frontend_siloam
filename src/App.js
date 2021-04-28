@@ -16,7 +16,6 @@ function App() {
     return (
       <div>
         <Router>
-         
           <Route  path="/" render={() => <Redirect to="/v1" />} />
           <Route path="/v1" component={ListPage} />
           {/* <Route path="/login" component={Login} />
