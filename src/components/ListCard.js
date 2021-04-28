@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import MoreHoriz from "@material-ui/icons/MoreHoriz";
@@ -15,16 +15,16 @@ import { Draggable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { setSubProducts } from "../_actions/listActions";
 import { userService } from "../services";
+import ProgressBar from "./progressBar";
 
-
-const ListCard = ({ data, index,cardId }) => {
+const ListCard = ({ data, index, cardId }) => {
   //   function rand() {
   //     return Math.round(Math.random() * 20) - 10;
   //   }
-  const[name, setName] = useState(data.name);
-  const[target, setTarget] = useState(data.todo_id);
+  const [name, setName] = useState(data.name);
+  const [target, setTarget] = useState(data.todo_id);
   const [percentage, setPercentage] = useState(0);
-  
+
   const dispatch = useDispatch();
   function getModalStyle() {
     const top = 50;
@@ -53,34 +53,34 @@ const ListCard = ({ data, index,cardId }) => {
   const handleOpenDelete = () => {
     setOpenDelete(true);
   };
-//   const handleClick = () => {
-//     dispatch(logout());
-// }
-const handleChange = event => {
-  setName(event.target.value)
-  }
-  const handleChange2 = event => {
-    setPercentage(event.target.value)
-    }
-    const handleChange3 = num => {
-      setTarget(num)
-      }
-const deleteCard = () => {
-  
-  userService.deleteList(data.id,data.todo_id)
-    .then((res) => res.json())
-    .then((result) => dispatch(setSubProducts(result)))
-    .catch((err) => console.log('error',err))
-    handleClose()
-}
-const editCard = () => {
-  userService.editList(data.id,data.todo_id,target,name)
-    .then((res) => res.json())
-    .then((result) => dispatch(setSubProducts(result)))
-    .catch((err) => console.log('error',err))
-    handleClose()
-    
-}
+  //   const handleClick = () => {
+  //     dispatch(logout());
+  // }
+  const handleChange = (event) => {
+    setName(event.target.value);
+  };
+  const handleChange2 = (event) => {
+    setPercentage(event.target.value);
+  };
+  const handleChange3 = (num) => {
+    setTarget(num);
+  };
+  const deleteCard = () => {
+    userService
+      .deleteList(data.id, data.todo_id)
+      .then((res) => res.json())
+      .then((result) => dispatch(setSubProducts(result)))
+      .catch((err) => console.log("error", err));
+    handleClose();
+  };
+  const editCard = () => {
+    userService
+      .editList(data.id, data.todo_id, target, name)
+      .then((res) => res.json())
+      .then((result) => dispatch(setSubProducts(result)))
+      .catch((err) => console.log("error", err));
+    handleClose();
+  };
 
   const handleModalClose = () => {
     setOpen(false);
@@ -88,20 +88,29 @@ const editCard = () => {
   const handleModalDeleteClose = () => {
     setOpenDelete(false);
   };
- 
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <span style={styles.modalTitle}>Edit Task</span>
       <span style={styles.modalSubTitle}>Task Name</span>
-      <input style={styles.modalInput1} value = {name} onChange = {handleChange}></input>
+      <input
+        style={styles.modalInput1}
+        value={name}
+        onChange={handleChange}
+      ></input>
       <p style={styles.modalSubTitle}>Progress</p>
-      <input style={styles.modalInput2} value = {percentage} onChange = {handleChange2} ></input>
+      <input
+        style={styles.modalInput2}
+        value={percentage}
+        onChange={handleChange2}
+      ></input>
       <div style={styles.buttonContainer}>
         <button onClick={handleModalClose} style={styles.buttonCancel}>
           Cancel
         </button>
-        <button style={styles.buttonSave} onClick={editCard}>Save Task</button>
+        <button style={styles.buttonSave} onClick={editCard}>
+          Save Task
+        </button>
       </div>
     </div>
   );
@@ -117,7 +126,9 @@ const editCard = () => {
         <button onClick={handleModalDeleteClose} style={styles.buttonCancel}>
           Cancel
         </button>
-        <button style={styles.buttonDelete} onClick={deleteCard}>Delete</button>
+        <button style={styles.buttonDelete} onClick={deleteCard}>
+          Delete
+        </button>
       </div>
     </div>
   );
@@ -141,10 +152,11 @@ const editCard = () => {
               </Typography>
               <div>
                 <div style={styles.bottom}>
-                  <div style={styles.meter}>
-                    <span style={styles.fill}></span>
-                  </div>
+                 
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',width:'100%'}}>
+                  <ProgressBar completed={data.progress_percentage} />
                   <MoreHoriz onClick={handleClick}></MoreHoriz>
+                  </div>
                   <Popover
                     id={id}
                     open={open}
@@ -161,10 +173,16 @@ const editCard = () => {
                   >
                     <Typography className={classes.typography}>
                       <Button className={classes.buttonNav}>
-                        <ArrowBackIcon onClick={handleChange3(1)}></ArrowBackIcon>Move Left
+                        <ArrowBackIcon
+                          onClick={handleChange3(1)}
+                        ></ArrowBackIcon>
+                        Move Left
                       </Button>
                       <Button className={classes.buttonNav}>
-                        <ArrowForwardIcon onClick={handleChange3(0)}></ArrowForwardIcon>Move Right
+                        <ArrowForwardIcon
+                          onClick={handleChange3(0)}
+                        ></ArrowForwardIcon>
+                        Move Right
                       </Button>
                       <Button
                         className={classes.buttonNav}
