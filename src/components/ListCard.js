@@ -27,7 +27,7 @@ const ListCard = ({ data, index, real,cardId }) => {
   const [name, setName] = useState(data.name);
   // const [target, setTarget] = useState(data.todo_id);
   // console.log('target first',target,data.todo_id)
-  const [percentage, setPercentage] = useState(0);
+  const [percentage, setPercentage] = useState(data.percentage);
 
   const dispatch = useDispatch();
   function getModalStyle() {
