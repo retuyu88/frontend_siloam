@@ -132,7 +132,7 @@ function getList(){
 
   
   export const addList = () => (dispatch, id,data) => {
-    console.log("hereeeee")
+    // console.log("hereeeee")
     userService.postItemList(id,data)
       .then(res => {
        
