@@ -18,7 +18,7 @@ function login(username, password) {
         localStorage.setItem('user_token',user.data.auth_token)
       }
       dispatch(success(user))
-   
+      window.location.reload()
     },
     error => {
       dispatch(failure(error.toString()));

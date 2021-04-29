@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { userActions } from "../../_actions";
 import "./Login.css";
 import { Link } from 'react-router-dom'
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 
 class Login extends React.Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class Login extends React.Component {
     if (email && password) {
       console.log("here");
       this.props.login(email,password)
-      return (<Redirect to="/" />)
+     
     }
   }
   render() {
