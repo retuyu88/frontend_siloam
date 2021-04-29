@@ -1,12 +1,14 @@
 import { CONSTANTS } from "../_constants";
 import { userService} from "../services";
 
+
 export const userActions = {
   login,
   register
 }
 
 function login(username, password) {
+ 
   return dispatch => {
     dispatch(request({username}));
 
@@ -16,7 +18,7 @@ function login(username, password) {
         localStorage.setItem('user_token',user.data.auth_token)
       }
       dispatch(success(user))
-      window.location.reload()
+   
     },
     error => {
       dispatch(failure(error.toString()));

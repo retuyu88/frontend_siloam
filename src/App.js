@@ -18,8 +18,8 @@ function App() {
         <Router>
           <Route  path="/" render={() => <Redirect to="/v1" />} />
           <Route path="/v1" component={ListPage} />
-          {/* <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} /> */}
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
         </Router>
       </div>
     );
@@ -29,7 +29,7 @@ function App() {
         <Router>
          
           <Route path="/" render={() => <Redirect to="/login" />} />
-          {/* <Route path="/v1" component={ListPage} /> */}
+          <Route path="/v1" component={ListPage} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
         </Router>
