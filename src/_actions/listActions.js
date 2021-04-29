@@ -17,21 +17,21 @@ function getListsPending() {
 }
 
 function getListsSuccess(products) {
-    console.log("here",products)
+    // console.log("here",products)
     return {
         type: SET_LIST_SUCCESS,
         products: products
     }
 }
 export const setSubProducts = (subProducts) => {
-    console.log("subProcust",subProducts)
+    // console.log("subProcust",subProducts)
     return {
         type: SET_SUB_LIST_SUCCESS,
         subProducts: subProducts
     }
 }
 export const editSubProducts = (subProducts) => {
-    console.log("edit SUB LIST",subProducts)
+    // console.log("edit SUB LIST",subProducts)
     return {
         type: EDIT_SUB_LIST,
         subProducts: subProducts
@@ -45,7 +45,7 @@ export const addSubList = (product) => {
     }
 }
 export const deleteSubList = (subList) => {
-    console.log("HEREdeleaction",subList)
+    // console.log("HEREdeleaction",subList)
     return {
         type: DELETE_SUB_LIST,
         subProducts : subList

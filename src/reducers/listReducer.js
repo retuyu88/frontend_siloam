@@ -34,14 +34,14 @@ export function listsReducer(listState = listInitialState, action) {
         pending: true,
       };
     case SET_LIST_SUCCESS:
-      console.log("HERE",action.products)
+      // console.log("HERE",action.products)
       return {
         ...listState,
         pending: false,
         products: action.products,
       };
       case SET_SUB_LIST_SUCCESS:
-        console.log("HERE",listState.subProducts)
+        // console.log("HERE",listState.subProducts)
         return {
           ...listState,
           pending: false,

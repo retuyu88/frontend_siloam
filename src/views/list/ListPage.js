@@ -47,11 +47,11 @@ class ListPage extends React.Component {
     const {lists} = this.props;
     const {subProducts} = this.props
     // const {dispatch} = this.props
-    console.log('lists',lists)
+    // console.log('lists',lists)
 
     lists.map( (res) => {
       userService.getItemList(res.id).then((res) => {
-       console.log('res',res)
+      //  console.log('res',res)
        subProducts(res)
       // 
     })
