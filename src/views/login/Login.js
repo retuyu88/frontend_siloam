@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { userActions } from "../../_actions";
-import { Redirect } from 'react-router-dom';
 import "./Login.css";
 import { Link } from 'react-router-dom'
-// import { useHistory } from "react-router-dom";
+import { Redirect } from 'react-router';
 
 class Login extends React.Component {
   constructor(props) {
@@ -28,18 +27,15 @@ class Login extends React.Component {
     });
   }
   handleSubmit(e) {
-    
+    // const { history } = this.props;
     e.preventDefault();
     this.setState({ submitted: true });
     const { email, password } = this.state;
     console.log("aa");
     if (email && password) {
-      // console.log("here");
+      console.log("here");
       this.props.login(email,password)
-      // this.props.history.push('/')
-     
-        return <Redirect to="/" />;
-      
+      return (<Redirect to="/" />)
     }
   }
   render() {
