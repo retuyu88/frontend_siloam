@@ -84,7 +84,7 @@ class Register extends React.Component {
               alt="loading..."
             />
           )}
-           <Link to="/register" className="btn btn-primary">Login</Link>
+           <Link to="/login" className="btn btn-primary">Login</Link>
         </form>
         
       </div>

@@ -13,16 +13,20 @@ import { CardContent, Popover } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { Draggable } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
-import { setSubProducts } from "../_actions/listActions";
+import { deleteSubList,editSubProducts } from "../_actions/listActions";
 import { userService } from "../services";
 import ProgressBar from "./progressBar";
 
 const ListCard = ({ data, index, cardId }) => {
+
+  console.log("index",index)
+  
   //   function rand() {
   //     return Math.round(Math.random() * 20) - 10;
   //   }
   const [name, setName] = useState(data.name);
-  const [target, setTarget] = useState(data.todo_id);
+  // const [target, setTarget] = useState(data.todo_id);
+  // console.log('target first',target,data.todo_id)
   const [percentage, setPercentage] = useState(0);
 
   const dispatch = useDispatch();
@@ -63,21 +67,22 @@ const ListCard = ({ data, index, cardId }) => {
     setPercentage(event.target.value);
   };
   const handleChange3 = (num) => {
-    setTarget(num);
+    // setTarget(num);
   };
   const deleteCard = () => {
     userService
       .deleteList(data.id, data.todo_id)
-      .then((res) => res.json())
-      .then((result) => dispatch(setSubProducts(result)))
+      .then((res) => res)
+      .then((result) => dispatch(deleteSubList(data.id)))
       .catch((err) => console.log("error", err));
     handleClose();
   };
   const editCard = () => {
+    // console.log('target',target,data.todo_id)
     userService
-      .editList(data.id, data.todo_id, target, name)
-      .then((res) => res.json())
-      .then((result) => dispatch(setSubProducts(result)))
+      .editList(data.id, data.todo_id, data.todo_id, name)
+      .then((res) => res)
+      .then((result) => dispatch(editSubProducts(result)))
       .catch((err) => console.log("error", err));
     handleClose();
   };
@@ -172,18 +177,22 @@ const ListCard = ({ data, index, cardId }) => {
                     }}
                   >
                     <Typography className={classes.typography}>
-                      <Button className={classes.buttonNav}>
-                        <ArrowBackIcon
-                          onClick={handleChange3(1)}
-                        ></ArrowBackIcon>
-                        Move Left
-                      </Button>
-                      <Button className={classes.buttonNav}>
-                        <ArrowForwardIcon
-                          onClick={handleChange3(0)}
-                        ></ArrowForwardIcon>
-                        Move Right
-                      </Button>
+              { index !== 0 &&  <Button className={classes.buttonNav}>
+                     <ArrowBackIcon
+                       onClick={handleChange3(1)}
+                     ></ArrowBackIcon>
+                     Move Left
+                   </Button> }
+                    
+                   { index !== 3&& 
+                     <Button className={classes.buttonNav}>
+                       <ArrowForwardIcon
+                         onClick={handleChange3(0)}
+                       ></ArrowForwardIcon>
+                       Move Right
+                     </Button>
+}
+                      
                       <Button
                         className={classes.buttonNav}
                         onClick={handleOpen}

@@ -8,10 +8,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // import { userService } from "../../services";
 // import {lists} from "../../reducers";
 import { userService } from "../../services";
-
+// import { addSubList } from "../../_actions/listActions";
 import fetchListActions from "../../_actions/listActions";
 
-import { getLists,getListsError,getListsPending,getSubLists} from "../../reducers/listReducer";
+import { setSubProducts } from "../../_actions/listActions";
+import { getLists,getListsError,getListsPending} from "../../reducers/listReducer";
 
 
 class ListPage extends React.Component {
@@ -29,7 +30,6 @@ class ListPage extends React.Component {
     const {fetchList} = this.props
     fetchList()
   
-  
   }
   getEveryList(id){
     const val = userService.getItemList(id)
@@ -42,8 +42,22 @@ class ListPage extends React.Component {
     // more tests
     return true;
 }
+
   render() {
     const {lists} = this.props;
+    const {subProducts} = this.props
+    // const {dispatch} = this.props
+    console.log('lists',lists)
+
+    lists.map( (res) => {
+      userService.getItemList(res.id).then((res) => {
+       console.log('res',res)
+       subProducts(res)
+      // 
+    })
+    return res
+  })
+  
     if(!this.shouldComponentRender()) return <CircularProgress />
     
     
@@ -148,11 +162,12 @@ const mapStateToProps = (state) => ({
   error: getListsError(state),
   lists: getLists(state),
   pending: getListsPending(state),
-  subLists : getSubLists(state)
+  // subLists : getSubLists(state)
 
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchList : fetchListActions
+  fetchList : fetchListActions,
+  subProducts : setSubProducts
 }, dispatch)
 
 

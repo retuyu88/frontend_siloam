@@ -7,7 +7,9 @@ import {
   SET_SUB_LIST_ERROR,
   SET_SUB_LIST_PENDING,
   SET_SUB_LIST_SUCCESS,
-  ADD_SUB_LIST
+  ADD_SUB_LIST,
+  DELETE_SUB_LIST,
+  EDIT_SUB_LIST
 } from "../_actions/listActions";
 
 const listInitialState = {
@@ -24,6 +26,7 @@ const listInitialState = {
 // }
 
 export function listsReducer(listState = listInitialState, action) {
+  
   switch (action.type) {
     case SET_LIST_PENDING:
       return {
@@ -31,18 +34,18 @@ export function listsReducer(listState = listInitialState, action) {
         pending: true,
       };
     case SET_LIST_SUCCESS:
-      // console.log("HERE",action.payload)
+      console.log("HERE",action.products)
       return {
         ...listState,
         pending: false,
         products: action.products,
       };
       case SET_SUB_LIST_SUCCESS:
-        // console.log("HERE",action.payload)
+        console.log("HERE",listState.subProducts)
         return {
           ...listState,
           pending: false,
-          subProducts: [...listState.subProducts,action.subProducts],
+          subProducts: listState.subProducts.concat(action.subProducts)
         };
     case SET_LIST_ERROR:
       return {
@@ -51,11 +54,32 @@ export function listsReducer(listState = listInitialState, action) {
         error: action.error,
       };
       case ADD_SUB_LIST:
-        console.log("HERE")
+        // console.log("HERE")
       return {
         ...listState,
-        count: action.product
+        product: action.product
       }
+      case DELETE_SUB_LIST:
+       
+        // console.log('subproducts ' ,action.subProducts)
+      return {
+        ...listState,
+        subProducts : listState.subProducts.filter(item => 
+        item.id !== action.subProducts
+    )
+      }
+      case EDIT_SUB_LIST:
+       
+        // console.log('subproducts ' ,action.subProducts)
+      return {
+        ...listState,
+        subProducts : listState.subProducts.map(val =>
+          val.id === action.subProducts.id ? val = action.subProducts : val
+            
+          )
+    
+      }
+      
     default:
       return listState;
   }

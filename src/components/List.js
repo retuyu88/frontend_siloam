@@ -1,10 +1,10 @@
 // import React, { useState } from "react";
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import ActionButton from "./ActionButton";
 import "./List.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import { connect,useDispatch} from "react-redux";
+import { connect,useDispatch,useSelector} from "react-redux";
 import { Droppable } from "react-beautiful-dnd";
 import { userService } from "../services";
 import  ListCard  from "./ListCard";
@@ -13,28 +13,28 @@ import { setSubProducts } from "../_actions/listActions";
 
 
 const ListContainer = ({ data, listId }) => {
-  
+console.log('listID',listId)
    const dispatch = useDispatch()
-   const [subData, setCount] = useState([]);
+  //  const [subData, setCount] = useState([]);
    const[name, setName] = useState("");
  const [percentage, setPercentage] = useState(0);
 
   //  const effect = useEffect()
 
-   useEffect(() => {
-    userService.getItemList(data.id).then((res) => {
-      console.log("res",res)
-      setCount(res)
-      dispatch(setSubProducts(res))})
+  //  useEffect(() => {
+  //   userService.getItemList(data.id).then((res) => {
+  //     // console.log("res",res)
+  //     setCount(res)
+  //     dispatch(setSubProducts(res))})
     
-  }, [data.id,dispatch])
-  
+  // }, [data.id,dispatch])
+  const listSub = useSelector(state => state.listsReducer.subProducts);
+  var subLists = listSub.filter(res=>
+      res.todo_id === data.id
+  )
+  // console.log('listsub',data.id,subLists)
 
-  // const subCard = useSelector((state) => state.listsReducer.subProducts)
-  console.log('subCard',subData)
-  // const realSub = subCard.filter(function(res) {return res.todo_id == data.id})
-  
-  // console.log('sublist',subList)
+
 
   function getModalStyle() {
     const top = 50;
@@ -81,7 +81,7 @@ const ListContainer = ({ data, listId }) => {
  
   const add = () => {
     userService.postItemList(data.id,name,percentage)
-      .then((res) => res.json())
+      .then((res) => res)
       .then((result) => dispatch(setSubProducts(result)))
       .catch((err) => console.log('error',err))
       handleClose()
@@ -141,11 +141,11 @@ const ListContainer = ({ data, listId }) => {
               </span>
             </div>
           </div>
-          {subData.map((card, index) => (
+          {subLists.map((card, index) => (
             
               <ListCard
-                key={card.id}
-                index={index}
+                key={index}
+                index={listId}
                 data={card}
                 cardId={card.id}
               ></ListCard>
