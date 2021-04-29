@@ -12,7 +12,7 @@ import { setSubProducts } from "../_actions/listActions";
 // import { addSubList } from "../_actions/listActions";
 
 
-const ListContainer = ({ data, listId }) => {
+const ListContainer = ({ data, listId,lists }) => {
 // console.log('listID',listId)
    const dispatch = useDispatch()
   //  const [subData, setCount] = useState([]);
@@ -147,6 +147,7 @@ const ListContainer = ({ data, listId }) => {
                 key={index}
                 index={listId}
                 data={card}
+                real= {lists}
                 cardId={card.id}
               ></ListCard>
             

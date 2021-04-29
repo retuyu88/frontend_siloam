@@ -73,6 +73,7 @@ class ListPage extends React.Component {
                   <ListContainer
                     key={list.id}
                     data = {list}
+                    lists= {lists}
                     listId = {i}
                   ></ListContainer>
                 )

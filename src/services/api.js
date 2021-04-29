@@ -65,9 +65,9 @@ function deleteList(id,todoId){
     })
   )
 }
-function editList(id,todoId,target_todo_id,name){
+function editList(id,todoId,target_todo_id,name,progress_percentage){
   return (
-  axios.put(`/todos/${todoId}/items/${id}`,{target_todo_id,name}, {headers : {Authorization: token}}).then((res) => {
+  axios.put(`/todos/${todoId}/items/${id}`,{target_todo_id,name,progress_percentage}, {headers : {Authorization: token}}).then((res) => {
       return res.data
     })
     .catch((error) => {

@@ -17,7 +17,7 @@ import { deleteSubList,editSubProducts } from "../_actions/listActions";
 import { userService } from "../services";
 import ProgressBar from "./progressBar";
 
-const ListCard = ({ data, index, cardId }) => {
+const ListCard = ({ data, index, real,cardId }) => {
 
   // console.log("index",index)
   
@@ -66,8 +66,26 @@ const ListCard = ({ data, index, cardId }) => {
   const handleChange2 = (event) => {
     setPercentage(event.target.value);
   };
-  const handleChange3 = (num) => {
-    // setTarget(num);
+
+  const handleChangeLeft = () => {
+    
+    const a = real.findIndex(p => p.id === data.todo_id)
+    // setTarget(2)
+    // console.log('here',data.todo_id ,data,real)
+    // console.log('INI',target)
+    // console.log("index before ",real[a-1].id)
+    
+    editCard(real[a-1].id)
+  };
+  const handleChangeRight = () => {
+    const a = real.findIndex(p => p.id === data.todo_id)
+    // setTarget(2)
+    // console.log('here',data.todo_id ,data,real)
+    // console.log('INI',target)
+    // console.log("index before ",real[a+1].id)
+    
+    editCard(real[a+1].id)
+
   };
   const deleteCard = () => {
     userService
@@ -77,10 +95,15 @@ const ListCard = ({ data, index, cardId }) => {
       .catch((err) => console.log("error", err));
     handleClose();
   };
-  const editCard = () => {
+  const handleEdit= () =>{
+   
+    editCard(data.todo_id)
+  }
+  const editCard = (s) => {
     // console.log('target',target,data.todo_id)
+
     userService
-      .editList(data.id, data.todo_id, data.todo_id, name)
+      .editList(data.id, data.todo_id, s, name,percentage)
       .then((res) => res)
       .then((result) => dispatch(editSubProducts(result)))
       .catch((err) => console.log("error", err));
@@ -113,7 +136,7 @@ const ListCard = ({ data, index, cardId }) => {
         <button onClick={handleModalClose} style={styles.buttonCancel}>
           Cancel
         </button>
-        <button style={styles.buttonSave} onClick={editCard}>
+        <button style={styles.buttonSave} onClick={handleEdit}>
           Save Task
         </button>
       </div>
@@ -177,17 +200,17 @@ const ListCard = ({ data, index, cardId }) => {
                     }}
                   >
                     <Typography className={classes.typography}>
-              { index !== 0 &&  <Button className={classes.buttonNav}>
+              { index !== 0 &&  <Button  onMouseDown={handleChangeLeft} className={classes.buttonNav}>
                      <ArrowBackIcon
-                       onClick={handleChange3(1)}
+                      
                      ></ArrowBackIcon>
                      Move Left
                    </Button> }
                     
                    { index !== 3&& 
-                     <Button className={classes.buttonNav}>
+                     <Button  onMouseDown={handleChangeRight} className={classes.buttonNav}>
                        <ArrowForwardIcon
-                         onClick={handleChange3(0)}
+                        
                        ></ArrowForwardIcon>
                        Move Right
                      </Button>
