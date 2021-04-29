@@ -13,7 +13,7 @@ import { setSubProducts } from "../_actions/listActions";
 
 
 const ListContainer = ({ data, listId }) => {
-console.log('listID',listId)
+// console.log('listID',listId)
    const dispatch = useDispatch()
   //  const [subData, setCount] = useState([]);
    const[name, setName] = useState("");

@@ -19,7 +19,7 @@ import ProgressBar from "./progressBar";
 
 const ListCard = ({ data, index, cardId }) => {
 
-  console.log("index",index)
+  // console.log("index",index)
   
   //   function rand() {
   //     return Math.round(Math.random() * 20) - 10;
