@@ -4,7 +4,7 @@ Front End Todo List
 
 Clone this repository on your local machine.
 ```
-git clone https://github.com/retuyu88/frontendtest-z react-todo-list
+git clone https://github.com/retuyu88/frontend_siloam react-todo-list
 cd react-todo-list
 ```
 Run the following commands into the project folder to install project dependencies.
