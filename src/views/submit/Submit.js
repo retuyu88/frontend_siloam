@@ -378,10 +378,13 @@ class Submit extends React.Component {
   }
 }
 
+function mapState(state) {
+  return
+}
 const actionCreators = {
   submitForm: userActions.submitForm,
 };
 
-const connectedSubmitPage = connect( actionCreators)(Submit);
+const connectedSubmitPage = connect(mapState, actionCreators)(Submit);
 
 export { connectedSubmitPage as Submit };
