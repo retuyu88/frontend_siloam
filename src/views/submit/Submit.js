@@ -4,9 +4,9 @@ import { userActions } from "../../_actions";
 import "./Submit.css";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Link } from "react-router-dom";
+
 import axios from "axios";
-// import { Redirect } from 'react-router';
+
 import logo from "../../assets/logo.png";
 
 class Submit extends React.Component {
@@ -18,7 +18,7 @@ class Submit extends React.Component {
 
     this.state = {
       step: 0,
-      email: "",
+   
       lang: "id",
       password: "",
       hospitals: [],
@@ -144,8 +144,8 @@ class Submit extends React.Component {
   }
 
   render() {
-    const { loggingIn } = this.props;
-    const { email,hospitals, password,full_name, contentEng, contentIdn, step, lang, genre,dob,phone,visited_hosp,pcr_antigen,fever_history,breathing_difficulty,cough_history,runny_nose,losing_smell,losing_taste,body_aches,vomit } =
+    
+    const { email,hospitals,full_name, contentEng, contentIdn, step, lang, genre,dob,phone,visited_hosp,pcr_antigen,fever_history,breathing_difficulty,cough_history,runny_nose,losing_smell,losing_taste,body_aches,vomit } =
       this.state;
     return (
       <div>
@@ -169,6 +169,7 @@ class Submit extends React.Component {
                 <img
                   className="image__landing"
                   src="https://mysiloam-api-staging.siloamhospitals.com/storage-down/mysiloam-form/mysiloam-form-16160655464527037.png"
+                  alt='Logo'
                 ></img>
               </div>
               <div className="title__container">
@@ -366,7 +367,7 @@ class Submit extends React.Component {
                    </button>  
                    </div>   
               </div>
-              <button style={{marginTop: "30px"}} onClick={this.submitEnd}  disabled={pcr_antigen ===null} style={pcr_antigen !== null? {background:"rgb(254, 207, 0)"}: {background:"rgb(216, 216, 216)",color:"rgb(151, 151, 151)"}} className="yellow__button">
+              <button onClick={this.submitEnd}  disabled={pcr_antigen ===null} style={pcr_antigen !== null? {background:"rgb(254, 207, 0)"}: {background:"rgb(216, 216, 216)",color:"rgb(151, 151, 151)"}} className="yellow__button">
                     Submit
                   </button> 
                </div>
@@ -376,14 +377,11 @@ class Submit extends React.Component {
     );
   }
 }
-function mapState(state) {
-  const { loggingIn } = state.authentication;
-  return { loggingIn };
-}
+
 const actionCreators = {
   submitForm: userActions.submitForm,
 };
 
-const connectedSubmitPage = connect(mapState, actionCreators)(Submit);
+const connectedSubmitPage = connect( actionCreators)(Submit);
 
 export { connectedSubmitPage as Submit };
